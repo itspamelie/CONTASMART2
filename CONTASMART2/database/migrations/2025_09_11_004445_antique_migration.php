@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('antiques', function (Blueprint $table) {
-            $table->increments("id");//
+            $table->id();
             $table->integer('dias_vacaciones');
             $table->decimal('prima_vacacional');
             $table->decimal('dias_aguinaldo');

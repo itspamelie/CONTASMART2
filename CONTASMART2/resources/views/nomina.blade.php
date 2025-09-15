@@ -1,211 +1,229 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ContaSmart</title>
+@extends('layouts.mainnomina')
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section('contenido')
+  <div class="p-4" style="flex-grow: 1; background-color: #f8f9fa;">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ <div class="container mt-2">
+        <h2>Nomina Principal</h2>
+       <p>Aquí puedes observar tu nómina y generar el reporte</p>
 
-  <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
 
-  <!-- Fuente Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-</head>
-<body>
+        <div class="select">
+  <select
+    id="options"
+    class="form-control"
+  >
+    <option value="1">
+      Datos generales
+  </option>
+    <option value="2">
+      Datos de asistencia
+    </option>
+    <option value="3">
+      ISR, IMSS, INFONAVIT Y deducciones
+    </option>
+  </select>
+</div>
 
-  <div id="carouselExampleCaptions" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="carousel-item active slide-in">
-        <img src="{{ asset('img/imagen_fondo_perfil.png') }}" class="d-block w-100 vh-100" alt="...">
 
-        <!-- Overlay oscuro -->
-        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.9);">
 
-          <!-- Botón con X en la esquina superior izquierda -->
-          <a class="btn position-absolute top-0 start-0 m-3 fw-bold bg-orange text-white"
-                  style="z-index: 999;"
-                  onmouseover="this.style.backgroundColor='#e69500'" 
-                  onmouseout="this.style.backgroundColor='orange'" href="dashboard">
-            Regresar
-</a>
+ <div class="container mt-2">
 
-          <!-- Botón con engrane en la esquina superior derecha -->
-          <button class="btn position-absolute top-0 end-0 m-3 text-white"
-                  style="z-index: 999;"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalEditar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                 class="bi bi-gear-fill" viewBox="0 0 16 16">
-              <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-            </svg>
-          </button>
+<table class="table" id="tabla1">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Tipo de Sueldo</th>
+      <th scope="col">Neto</th>
+      <th scope="col">Factor</th>
+      <th scope="col">SD</th>
+      <th scope="col">SDI</th>
+      <th scope="col">Dias</th>
+      <th scope="col">Ultimo dia</th>
+      <th scope="col">Sueldo Total</th>
+      <th scope="col">Sueldo ult. dia</th>
+      <th scope="col">Aguinaldo</th>
+      <th scope="col">Vacaciones</th>
+      <th scope="col">Prima vacacional</th>
 
-          <!-- Contenido centrado -->
-          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 slide-in">
-            <img src="{{ asset('imgs_de_perfil/astronauta.webp') }}"
-                 alt="Foto de usuario"
-                 class="dropdown-toggle me-3"
-                 style="width: 40%; height: 60%; border-radius: 50%; border: 2px solid white; cursor: pointer;"
-                 id="userDropdown"
-                 role="button"
-                 data-bs-toggle="dropdown"
-                 aria-expanded="false">
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($rosters as $n)
+    <tr>
+      <td>{{$n->name}}</td>
+      <td>
+    @switch($n->tipo_sueldo)
+        @case(1)
+            Semanal
+            @break
+        @case(2)
+            Quincenal
+            @break
+        @case(3)
+            Mensual
+            @break
+        @default
+            No definido
+    @endswitch
+</td>
 
-            <h1 class="fw-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">{{ Auth::user()->name}}  {{ Auth::user()->lastname }}</h1>
-            <p class="fw-bold" style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">Grupo {{ Auth::user()->group}} | {{ Auth::user()->semester}} Semestre</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <td></td>
+<td>{{ $n->factor_antiguedad }}</td>
+      <td>{{$n->salario}}</td>
+      <td></td>
+      <td> @switch($n->tipo_sueldo)
+        @case(1)
+           6
+            @break
+        @case(2)
+           14
+            @break
+        @case(3)
+            29
+            @break
+        @default
+            No definido
+    @endswitch</td>
+      <td>1</td>
+      <td> @switch($n->tipo_sueldo)
+        @case(1)
+           {{ $n->salario*7}}
+            @break
+        @case(2)
+           {{$n->salario*15}} 
+            @break
+        @case(3)
+            {{$n->salario*30}}
+            @break
+        @default
+            No definido
+    @endswitch</td>
+      <td>{{$n->salario}}</td>
+      <td>{{ number_format(($n->salario * 15) / 365, 4) }}</td>
+      <td>{{$n->dias_vacaciones}}</td>      
+    <td>{{ number_format(($n->salario * $n->dias_vacaciones * .25) / 365, 4) }}</td>
 
-  <!-- Modal Editar Perfil -->
-  <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
 
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalEditarLabel">Editar Perfil</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
 
-        <div class="modal-body">
-          <form action="/editarusuario" method="POST">
-            @csrf
-     <!-- Campo oculto para el ID -->
-          <input type="hidden" name="id" value="{{ Auth::user()->id}}">
+    </tr>
+    @endforeach
+  
+  </tbody>
+</table>
 
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="semestre" class="form-label fw-bold" name="semester">Semestre</label>
-               <select id="semestre" name="semester" class="form-select">
-  <option disabled>Selecciona semestre</option>
-  <option value="1" {{ Auth::user()->semester == 1 ? 'selected' : '' }}>1</option>
-  <option value="2" {{ Auth::user()->semester == 2 ? 'selected' : '' }}>2</option>
-  <option value="3" {{ Auth::user()->semester == 3 ? 'selected' : '' }}>3</option>
-  <option value="4" {{ Auth::user()->semester == 4 ? 'selected' : '' }}>4</option>
-  <option value="5" {{ Auth::user()->semester == 5 ? 'selected' : '' }}>5</option>
-  <option value="6" {{ Auth::user()->semester == 6 ? 'selected' : '' }}>6</option>
-  <option value="7" {{ Auth::user()->semester == 7 ? 'selected' : '' }}>7</option>
-  <option value="8" {{ Auth::user()->semester == 8 ? 'selected' : '' }}>8</option>
-  <option value="9" {{ Auth::user()->semester == 9 ? 'selected' : '' }}>9</option>
-</select>
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="grupo" class="form-label fw-bold">Grupo</label>
-                <select id="grupo" name="group" class="form-select">
-  <option value="A" {{ Auth::user()->group == 'A' ? 'selected' : '' }}>A</option>
-  <option value="B" {{ Auth::user()->group == 'B' ? 'selected' : '' }}>B</option>
-                </select>
-              </div>
-            </div>
 
-            <div class="mb-3">
-              <label for="correo" class="form-label fw-bold">Correo electrónico</label>
-<input type="email" class="form-control" id="correo"  name="email" value="{{ Auth::user()->email }}">
-            </div>
 
-            <!-- Botón para mostrar u ocultar campos de contraseña -->
-            <div class="mb-3">
-              <button type="button" class="btn bg-orange text-white fw-bold" id="togglePasswordFields"
-                      onmouseover="this.style.backgroundColor='#e69500'"
-                      onmouseout="this.style.backgroundColor='orange'">
-                Cambiar contraseña
-              </button>
-            </div>
+<table class="table" id="tabla2" style="display:none;">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Percepciones</th>
+      <th scope="col">Sueldo</th>
+      <th scope="col">Sept</th>
+      <th scope="col">Bono desp</th>
+      <th scope="col">Bono punt</th>
+      <th scope="col">Bono asist</th>
+      <th scope="col">H.E</th>
 
-            <!-- Campos ocultos por defecto -->
-            <div id="passwordFields" style="display: none;">
-              <div class="mb-3">
-                <label for="nuevaPassword" class="form-label fw-bold">Nueva contraseña</label>
-                <input type="password" class="form-control" name="newpassword" id="nuevaPassword" placeholder="Nueva contraseña">
-              </div>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($rosters as $n)
+    <tr>
+      <td>{{$n->name}}</td>
+      <td><input type="number" style="width:60px;"></td>
+      <td></td>
+      <td></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td>6</td>
+      <td>1</td>
+      <td><input type="number" value="{{$n->salariodiario*7}}" style="width:60px;"></td>
+      <td></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td><input type="number" style="width:60px;"></td>
 
-              <div class="mb-3">
-                <label for="confirmarPassword" class="form-label fw-bold">Confirmar contraseña</label>
-                <input type="password" class="form-control" name="confirmpassword"
-                id="confirmarPassword" placeholder="Confirma tu contraseña">
-              </div>
-            </div>
+    </tr>
+    @endforeach
+  
+  </tbody>
+</table>
 
-            <div class="modal-footer">
-              <button type="button" 
-        class="btn fw-bold text-white border-0" 
-        style="background-color: red; box-shadow: none; outline: none;"
-        onmouseover="this.style.backgroundColor='#c10000'" 
-        onmouseout="this.style.backgroundColor='red'" 
-        data-bs-dismiss="modal">
-  Cancelar
-</button>
 
-<button type="submit" 
-        class="btn fw-bold text-white border-0 " 
-        style="background-color: orange; box-shadow: none; outline: none;"
-        onmouseover="this.style.backgroundColor='#e69500'" 
-        onmouseout="this.style.backgroundColor='orange'">
-  Guardar Cambios
-</button>
 
-            </div>
-          </form>
-        </div>
+<table class="table" id="tabla3" style="display:none;">
+  <thead>
+    <tr>
+      <th scope="col">HOLA</th>
+      <th scope="col">Neto</th>
+      <th scope="col">Factor</th>
+      <th scope="col">SD</th>
+      <th scope="col">SDI</th>
+      <th scope="col">Dias</th>
+      <th scope="col">Septimo dia</th>
+      <th scope="col">Sueldo</th>
+      <th scope="col">Sueldo septimo dia</th>
+      <th scope="col">Aguinaldo</th>
+      <th scope="col">Vacaciones</th>
+      <th scope="col">Prima vacacional</th>
 
-      </div>
-    </div>
-  </div>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach($rosters as $n)
+    <tr>
+      <td>{{$n->name}}</td>
+      <td><input type="number" style="width:60px;"></td>
+      <td></td>
+      <td></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td>6</td>
+      <td>1</td>
+      <td><input type="number" value="{{$n->salariodiario*7}}" style="width:60px;"></td>
+      <td></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td><input type="number" style="width:60px;"></td>
+      <td><input type="number" style="width:60px;"></td>
 
-  <!-- Script para mostrar/ocultar campos -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const toggleBtn = document.getElementById('togglePasswordFields');
-      const passwordSection = document.getElementById('passwordFields');
-
-      toggleBtn.addEventListener('click', function () {
-        const visible = passwordSection.style.display === 'block';
-        passwordSection.style.display = visible ? 'none' : 'block';
-        toggleBtn.textContent = visible ? 'Cambiar contraseña' : 'Cancelar cambio de contraseña';
-      });
-    });
-  </script>
-
-  <!-- Bootstrap JS -->
+    </tr>
+    @endforeach
+  
+  </tbody>
+</table>
+</div>
+</div>
+@endsection
+  @section('script')
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
-@if (session('message'))
 <script>
-Swal.fire({
-  icon: 'success',
-  title: '¡Éxito!',
-  text: '{{ session('message') }}',
-  customClass: {
-    confirmButton: 'bg-blue text-white'
-  }
-});
+  document.querySelector('#options').addEventListener('change',function(){
+    var id=document.querySelector('#options').value
+    document.querySelector("#tabla"+id).style.display='block'
+    console.log(id)
+    if(id==1){
+    document.querySelector("#tabla2").style.display='none'
+    document.querySelector("#tabla3").style.display='none'
+
+
+    } else if(id==2) {
+    document.querySelector("#tabla1").style.display='none'
+    document.querySelector("#tabla3").style.display='none'
+
+
+    } else {
+    document.querySelector("#tabla1").style.display='none'
+    document.querySelector("#tabla2").style.display='none'
+
+
+
+    }
+
+
+
+
+
+  })
+
 </script>
-@endif
-
-@if (session('error'))
-<script>
-Swal.fire({
-  icon: 'error',
-  title: '¡Error!',
-  text: '{{ session('error') }}',
-  customClass: {
-    confirmButton: 'bg-blue text-white'
-  }
-});
-</script>
-@endif
-
-
-
-</body>
-</html>
-
+@endsection

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--divinectorweb.com-->
+<head>
+    <meta charset="UTF-8">
+    <title>How to 3D Testimonial Carousel using Materialize CSS</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ asset('/css/styles.css')}}"> 
+ 
+    <style>
+      
+.carousel{
+    height: 300px; 
+    perspective: 250px; 
+    background-color: #1fbbd5;
+    
+}
+.carousel .carousel-item {
+	width: 300px;
+	background: #fff;
+	padding: 30px;
+	height: 300px;
+	text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    border-radius: 15px;
+    background-color: #0576bb;
+
+}
+.img-area{
+    width: 200px;
+    height:200px;
+}
+        .img-area img{
+            width: 100%;
+        }
+
+</style>  
+</head>
+<body>
+    
+    
+    <div class="carousel">
+        <a class="carousel-item d-flex justify-content-center" href="#">
+            <div class="testi">
+                <div class="img-area">
+                    <img src="/img/calculadoraicon2.png">
+                </div>
+            </div>
+        </a>
+        <a class="carousel-item d-flex justify-content-center" href="#">
+            <div class="testi">
+                <div class="img-area">
+                    <img src="/img/pencilicon.png">
+                </div>
+            </div>
+        </a>
+        <a class="carousel-item d-flex justify-content-center " href="#">
+            <div class="testi">
+                <div class="img-area">
+                    <img src="/img/basculaicon2.png">
+                </div>
+            </div>
+        </a>
+        <a class="carousel-item d-flex justify-content-center " href="#">
+            <div class="testi">
+                <div class="img-area">
+                    <img src="/img/brainicon2.png">
+                </div>
+            </div>
+        </a>
+        <a class="carousel-item d-flex justify-content-center " href="#">
+            <div class="testi">
+                <div class="img-area">
+                    <img src="/img/reporticon.png">
+                </div>
+            </div>
+        </a>
+       
+      
+   </div>
+
+    
+    
+    
+    <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel({
+			padding: 200
+	});
+	autoplay();
+	function autoplay() {
+		$('.carousel').carousel('next');
+		setTimeout(autoplay, 4500);
+	}
+  });
+</script>
+</body>
+</html>

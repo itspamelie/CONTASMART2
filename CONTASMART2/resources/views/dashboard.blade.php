@@ -53,8 +53,8 @@
     <div class="row g-3">
 
     <!--ITERAR PARA IMPRIMIR VARIAS VECES LOS DATOS-->
-@if(!empty($practicas))
- @foreach($practicas as $p)
+@if(!empty($practices))
+ @foreach($practices as $p)
 
       <div class="col-md-6 col-lg-4">
         <div class="card h-100">
@@ -62,7 +62,7 @@
             <h5 class="card-title mb-3">{{$p->titulo}}</h5>
             <div class="d-flex justify-content-between">
 
-             <a href="{{ url('/datosiniciales/' . $p->id_practica) }}"
+             <a href="{{ url('/datosiniciales/' . $p->id) }}"
    class="btn bg-blue text-white flex-fill me-1 border-0"
    onmouseover="this.style.backgroundColor='#0056b3'"
    onmouseout="this.style.backgroundColor='#007bff'">
@@ -83,7 +83,7 @@
    style="background-color: orange;"
    data-bs-toggle="modal"
    data-bs-target="#modalEditar"
-   data-id="{{$p->id_practica}}"
+   data-id="{{$p->id}}"
    data-title="{{$p->titulo}}"
    onmouseover="this.style.backgroundColor='#e69500'"
    onmouseout="this.style.backgroundColor='orange'">
@@ -105,7 +105,7 @@
 
 <form action="/deleteproyect" method="POST" class="form-eliminar" style="display: inline;">
     @csrf
-    <input type="hidden" name="id" value="{{ $p->id_practica }}">
+    <input type="hidden" name="id" value="{{ $p->id }}">
     <button type="submit" class="btn btn-danger flex-fill ms-1 text-white">
         <svg xmlns="http://www.w3.org/2000/svg"
              width="16" height="16"
@@ -120,7 +120,7 @@
 
 
             </div>
-            <p class="mt-3" style="opacity: 0.6;">Creado el: {{$p->fechadecreacion}}</p>
+            <p class="mt-3" style="opacity: 0.6;">Creado el: {{$p->created_at}}</p>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@
   <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active slide-in">
-        <img src="{{ asset('img/imagen_fondo_perfil.png') }}" class="d-block w-100 vh-100" alt="...">
+        <img src="{{ asset('imgs_de_perfil/' . Auth::user()->profile_id . '.webp') }}" class="d-block w-100 vh-100" alt="...">
 
         <!-- Overlay oscuro -->
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.9);">
@@ -47,7 +47,7 @@
 
           <!-- Contenido centrado -->
           <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100 slide-in">
-            <img src="{{ asset('imgs_de_perfil/astronauta.webp') }}"
+            <img src="{{ asset('imgs_de_perfil/' . Auth::user()->profile_id . '.webp') }}"
                  alt="Foto de usuario"
                  class="dropdown-toggle me-3"
                  style="width: 40%; height: 60%; border-radius: 50%; border: 2px solid white; cursor: pointer;"

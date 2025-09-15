@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 //Modelo de la base de datos a usar
-use App\Models\Practica;
+use App\Models\Practice;
 use App\Models\Year;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +20,13 @@ class DashboardController extends Controller
 public function index()
 {
     $idUsuario = Auth::id();
-    $practicas = Practica::where('user_id', $idUsuario)
-                         ->orderBy('id_practica', 'desc')
+    $practicas = Practice::where('user_id', $idUsuario)
+                         ->orderBy('id', 'desc')
                          ->get();
     if ($practicas->isEmpty()) {
         return view('dashboard')->with('mensaje', 'Aún no tienes prácticas registradas.');
     }
-    return view('dashboard')->with('practicas', $practicas);
+    return view('dashboard')->with('practices', $practicas);
 }
 
     /**
@@ -43,13 +43,13 @@ public function index()
     {
         //Para hacer pruebas se usa dd($request->title);
         //
-        $practica = new Practica();
+        $practica = new Practice();
         $practica->titulo=$request->title;
-        $practica->fechadecreacion=date('Y-m-d h:i:s');
+        $practica->created_at=date('Y-m-d h:i:s');
         $practica->user_id=Auth::user()->id;
        
-        $year = Year::orderBy('id_year','DESC')->get()->first();
-        $practica->year_id=$year->id_year;
+        $year = Year::orderBy('id','DESC')->get()->first();
+        $practica->year_id=$year->id;
         $practica->save();
         return redirect('dashboard')->with('message','Práctica generada exitosamente.');
     }
@@ -75,7 +75,7 @@ public function index()
      */
     public function update(Request $request)
     {
-        $practica =Practica::find($request->id);
+        $practica =Practice::find($request->id);
         $practica->titulo=$request->title;
         $practica->save();
         return redirect('dashboard')->with('message','Nombre actualizado correctamente.');
@@ -87,7 +87,7 @@ public function index()
      */
     public function destroy(Request $request)
     {
-        $practica = Practica::find($request->id);
+        $practica = Practice::find($request->id);
     if ($practica) {
         $practica->delete();
         return redirect('dashboard')->with('message', 'Proyecto eliminado correctamente.');

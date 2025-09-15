@@ -114,7 +114,7 @@
 
 
 <div class="d-flex text-center justify-content-center">
-<h4 class="">Campos relacionados con la nomina del empleado.</h4>
+<h5 class="">Campos relacionados con la nomina del empleado.</h4>
 </div>
 
 
@@ -187,13 +187,157 @@ Prestación establecida por la Ley Federal del Trabajo (LFT) en México, que gar
 </div>
 </div>
 
-<div class="d-flex text-center justify-content-center mt-4">
-<h4 class="">Campos relacionados con las prestaciones del empleado.</h4>
-</div>
+
+
+<div class="container my-5">
+        <h2 class="text-center mb-4">Campos relacionados con las prestaciones y deducciones del empleado</h2>
+        <hr>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Aguinaldo</h4>
+            </div>
+            <div class="card-body">
+                <p>El aguinaldo es un ingreso adicional que ayuda a los empleados durante las festividades de fin de año. Por ley, si has cumplido un año de trabajo con tu empleador, te corresponde un aguinaldo equivalente al salario de <strong>15 días</strong>. Si no has trabajado un año completo, recibirás un aguinaldo proporcional.</p>
+                <div class="alert alert-info">
+                    <strong>Fórmula:</strong>
+                    <div class="formula">Aguinaldo = Salario neto diario × Días de aguinaldo</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Vacaciones</h4>
+            </div>
+            <div class="card-body">
+                <p>Las vacaciones son un período de descanso remunerado. El Artículo 7 de la LFT establece que, después de un año de servicio, los trabajadores tienen derecho a un mínimo de <strong>12 días de vacaciones pagadas</strong>, que aumentan en dos días por cada año subsecuente hasta llegar a 20. Después, el aumento es de dos días por cada cinco años de servicio.</p>
+                <div class="alert alert-info">
+                    <strong>Fórmulas:</strong>
+                    <div class="formula">
+                        Vacaciones = Días de vacaciones × Salario Diario del empleado<br><br>
+                        <strong>Para tiempo proporcional:</strong><br>
+                        Vacaciones = ((12 días de vacaciones / 365 días del año) × días laborados) × Salario diario
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Prima Dominical</h4>
+            </div>
+            <div class="card-body">
+                <p>Es un monto adicional que se paga por trabajar los domingos. Esta prima corresponde al <strong>25% adicional</strong> al salario de ese día.</p>
+                <div class="alert alert-info">
+                    <strong>Fórmula:</strong>
+                    <div class="formula">Prima dominical = Salario diario ordinario × 25% × Cantidad de domingos trabajados</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Horas Extras Dobles y Triples</h4>
+            </div>
+            <div class="card-body">
+                <p>
+                    <strong>Horas extras dobles:</strong> Se pagan al doble de la tarifa regular. El límite es de <strong>9 horas dobles a la semana</strong>.
+                </p>
+                <div class="alert alert-info">
+                    <strong>Fórmula:</strong>
+                    <div class="formula">Horas extras dobles = Salario por hora × Horas extras trabajadas × 2</div>
+                </div>
+                <p>
+                    <strong>Horas extras triples:</strong> Aplican cuando se excede el límite de 9 horas extras semanales. Estas se pagan al <strong>triple</strong> de la tarifa regular.
+                </p>
+                <div class="alert alert-info">
+                    <strong>Fórmula:</strong>
+                    <div class="formula">Horas extras triples = Salario por hora × Horas extras trabajadas × 3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Bonos</h4>
+            </div>
+            <div class="card-body">
+                <p>De acuerdo con el artículo 84, los bonos recurrentes forman parte del salario integrado. Esto significa que deben ser considerados al calcular prestaciones como el aguinaldo, la prima vacacional e indemnizaciones.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Percepciones y Deducciones</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Percepciones:</strong> Son los ingresos que el empleado recibe por el trabajo realizado en un periodo determinado.</li>
+                    <li class="list-group-item"><strong>Deducciones:</strong> Son los importes que se restan del salario bruto de un empleado para obtener su salario neto.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Impuesto Sobre la Renta (ISR)</h4>
+            </div>
+            <div class="card-body">
+                <p>El ISR es un impuesto que se aplica a los ingresos de personas físicas o empresas. Se calcula aplicando una tasa que varía según el tipo y monto de ingreso. Están obligados a pagarlo:</p>
+                <ul>
+                    <li>Personas que viven y trabajan en México.</li>
+                    <li>Empresas en México.</li>
+                    <li>Personas en el extranjero con negocios que les generan ingresos en México.</li>
+                </ul>
+                <div class="card-footer bg-light">
+                    <h6 class="text-center">Cómo calcular el ISR con las Tablas de ISR:</h6>
+                    <ol>
+                        <li><strong>Determina la base gravable:</strong> Tu ingreso total menos las deducciones permitidas.</li>
+                        <li><strong>Ubica tu tabla de ISR y Límite Inferior:</strong> Elige la tabla correcta (mensual, quincenal, etc.) y encuentra el Límite inferior más cercano a tu base gravable, sin ser mayor.</li>
+                        <li><strong>Resta el Límite Inferior:</strong> A tu ingreso total, réstale el Límite inferior.</li>
+                        <li><strong>Aplica el porcentaje:</strong> Multiplica el resultado anterior por el porcentaje que corresponda a tu rango de ingresos.</li>
+                        <li><strong>Suma la Cuota Fija:</strong> Suma la Cuota fija que se encuentra en la misma fila de la tabla. El resultado es el total del ISR.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>Subsidio al Empleo (SAE)</h4>
+            </div>
+            <div class="card-body">
+                <p>Es un beneficio fiscal que reduce el Impuesto Sobre la Renta (ISR) que se retiene a los trabajadores con salarios bajos o medios.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h4>RCV (Retiro, Cesantía y Vejez)</h4>
+            </div>
+            <div class="card-body">
+                <p>En esta subcuenta se depositan las cuotas y aportaciones tripartitas (patrón, gobierno federal y trabajador) para el retiro.</p>
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <strong>Patrón:</strong> Aporta el 2% del salario base de cotización (SBC) para retiro y 3.15% del SBC para cesantía y vejez.
+                    </div>
+                    <div class="list-group-item">
+                        <strong>Gobierno:</strong> Aporta el 0.225% del SBC para cesantía y vejez, más una cuota social equivalente al 5.5% del salario mínimo por cada día cotizado.
+                    </div>
+                    <div class="list-group-item">
+                        <strong>Trabajador:</strong> Aporta el 1.125% sobre el salario base de cotización de manera bimestral.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
 
   </div>
-
+</div>
 @endsection
 
 @section('script')

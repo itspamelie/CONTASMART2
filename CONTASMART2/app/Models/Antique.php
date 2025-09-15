@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Antique extends Model
 {
     protected $table = "antiques";
+    protected $primaryKey = "id";
     //Campos de la tabla
     protected $fillable = [
         'dias_vacaciones',

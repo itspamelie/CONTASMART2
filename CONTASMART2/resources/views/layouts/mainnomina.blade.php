@@ -66,7 +66,7 @@
 
     <!-- Imagen con dropdown -->
     <div class="dropdown">
-      <img src="{{ asset('imgs_de_perfil/astronauta.webp') }}"
+      <img src="{{ asset('imgs_de_perfil/' . Auth::user()->profile_id . '.webp') }}" 
            alt="Foto de usuario"
            class="dropdown-toggle me-3"
            style="width: 45px; height: 45px; border-radius: 50%; border: 2px solid white; cursor: pointer;"

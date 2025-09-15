@@ -17,14 +17,15 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    protected $table = "users";
+    protected $primaryKey = "id";
     protected $fillable = [
         'name',
         'lastname',
         'group',
         'semester',
-        'rol',
+        'role',
         'email',
-        'password',
         'password',
         'profile_id'
     ];

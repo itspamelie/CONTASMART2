@@ -6,7 +6,7 @@
 
 <form action="/updateyear" method="POST">
     @csrf
-    <input type="hidden" name="id_practica" value="{{ $practica->id_practica }}">
+    <input type="hidden" name="id" value="{{ $practica->id}}">
     
     <label for="miCombo" class="form-label">Selecciona el año en el que quieres calcular tu nómina.</label>
     <select id="miCombo" class="form-select" name="year">
@@ -34,7 +34,7 @@
   <form action="/addnomina" method="POST">
   @csrf
   <!-- Tabla de empleados -->
-   <input type="hidden" name="id_practica" value="{{ $practica->id_practica }}"> <!-- asi se jala la practica-->
+   <input type="hidden" name="id_practica" value="{{ $practica->id }}"> <!-- asi se jala la practica-->
   <table class="table mt-3">
     <thead>
       <tr>
@@ -42,6 +42,8 @@
         <th scope="col">Nombre del empleado</th>
         <th scope="col">Salario Diario</th>
         <th scope="col">Antiguedad (años)</th>
+        <th scope="col">Tipo de sueldo</th>
+
       </tr>
     </thead>
     <tbody id="tabla-empleados">
@@ -76,6 +78,11 @@
                 min="{{$year_practica->sm}}" 
                 step="0.01" class="form-control" name="empleados[${i}][salario]" required></td>
           <td><input type="number" class="form-control" min="1" max="60" name="empleados[${i}][antiguedad]" required></td>
+      <td> <select class="form-select" name="empleados[${i}][tipo_sueldo]" required>
+                <option value="1">Semanal</option>
+                <option value="2">Quincenal</option>
+                <option value="3">Mensual</option>
+            </select></td>
         `;
 
         tbody.appendChild(fila);

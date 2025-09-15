@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
           Schema::create('practices', function (Blueprint $table) {
-            $table->increments("id");//
-            $table->mediumText('titulo');            
+            $table->id();
+            $table->string('titulo');            
             //llave foranea de users
             $table->foreignId('user_id')->constrained('users');
             //llave foranea  de years
             $table->foreignId('year_id')->constrained('years');
+            $table->timestamps();
+
         });
     }
 
