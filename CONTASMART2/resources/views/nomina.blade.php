@@ -63,8 +63,6 @@
         @case(3)
             Mensual
             @break
-        @default
-            No definido
     @endswitch
 </td>
 
@@ -82,8 +80,6 @@
         @case(3)
             29
             @break
-        @default
-            No definido
     @endswitch</td>
       <td>1</td>
       <td> @switch($n->tipo_sueldo)
@@ -96,14 +92,11 @@
         @case(3)
             {{$n->salario*30}}
             @break
-        @default
-            No definido
     @endswitch</td>
       <td>{{$n->salario}}</td>
       <td>{{ number_format(($n->salario * 15) / 365, 4) }}</td>
       <td>{{$n->dias_vacaciones}}</td>      
-    <td>{{ number_format(($n->salario * $n->dias_vacaciones * .25) / 365, 4) }}</td>
-
+      <td></td>
 
 
     </tr>
