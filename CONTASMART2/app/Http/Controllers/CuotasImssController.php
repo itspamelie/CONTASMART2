@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session; //PONER EN TODOS LOS CONTROLADORES DE NOMINA
 use Illuminate\Http\Request;
-//importar el modelo de la practica
-use App\Models\Practica;
+//PONER EN TODOS LOS CONTROLADORES DE NOMINA
+use Illuminate\Support\Facades\DB;
+use App\Models\Practice;
+use App\Models\Year;
+use Auth;
+use App\Models\Roster;
 
 class CuotasimssController extends Controller
 {
@@ -13,16 +17,19 @@ class CuotasimssController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(string $id)
     {
-$practica = Session::get('practica');
-         if ($practica) {
-             return view('cuotasimss')->with('practica',$practica);
-        } else {
-            return redirect()->back()->with('error', 'No se encontró la práctica en la sesión.');
-        }
-         return view('cuotasimss');  
-          }
+        $practica = Practice::find($id);
+    if (!$practica || $practica->user_id != Auth::user()->id) {
+        return redirect('dashboard')->with('error', 'No se encontró la práctica.');
+    }
+
+    $years = DB::table('years')->pluck('year', 'id');
+    $year_practica = Year::find($practica->year_id);
+    
+    // Eliminamos el uso de la sesión aquí.
+    return view('cuotasimss', compact('practica', 'years', 'year_practica'));
+    }
 
     /**
      * Show the form for creating a new resource.

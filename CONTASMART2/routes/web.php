@@ -26,13 +26,13 @@ Route::post('/addnomina', [DatosinicialesController::class, 'store']);
 
 
 Route::get('/nomina', [RosterController::class,'index']);
-Route::get('/cuotasimss', [CuotasimssController::class,'index']);
+Route::get('/cuotasimss/{id}', [CuotasimssController::class,'index']);
 Route::get('/datosiniciales/{id}', [DatosinicialesController::class, 'show'])->name('datosiniciales.show');
 Route::get('/isr/{id}', [IsrController::class,'index'])->name('isr.show');
-Route::get('/imss', [ImssController::class,'index']);
-Route::get('/aguinaldo', [AguinaldoController::class,'index']);
-Route::get('/costoimss', [CostoimssController::class,'index']);
-Route::get('/sdi', [SdiController::class,'index']);
+Route::get('/imss/{id}', [ImssController::class,'index']);
+Route::get('/aguinaldo/{id}', [AguinaldoController::class,'index']);
+Route::get('/costoimss/{id}', [CostoimssController::class,'index']);
+Route::get('/sdi/{id}', [SdiController::class,'index']);
 Route::get('/perfil', [ProfileController::class,'index']);
 
 
