@@ -32,7 +32,7 @@ Route::get('/isr/{id}', [IsrController::class,'index'])->name('isr.show');
 Route::get('/imss', [ImssController::class,'index']);
 Route::get('/aguinaldo', [AguinaldoController::class,'index']);
 Route::get('/costoimss', [CostoimssController::class,'index']);
-Route::get('/sdi', [SdiController::class,'index']);
+Route::get('/sdi/{id}', [SdiController::class,'index']);
 Route::get('/perfil', [ProfileController::class,'index']);
 
 
