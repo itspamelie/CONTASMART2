@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //Modelo de la base de datos a usar
 use App\Models\Practice;
 use App\Models\Year;
+use App\Models\Roster;
 use Illuminate\Support\Facades\Auth;
 
 //SESION
@@ -87,9 +88,11 @@ public function index()
      */
     public function destroy(Request $request)
     {
-        $practica = Practice::find($request->id);
-    if ($practica) {
-        $practica->delete();
+       $practica = Practice::find($request->id);
+       if ($practica) {
+    Roster::where('id_practica', $practica->id)->delete();
+    $practica->delete();
+        
         return redirect('dashboard')->with('message', 'Proyecto eliminado correctamente.');
     } else {
         return redirect('dashboard')->with('error', 'No se ha encontrado el proyecto');

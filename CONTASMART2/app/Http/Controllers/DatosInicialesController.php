@@ -18,19 +18,7 @@ class DatosinicialesController extends Controller
      */
 public function index()
 {
-     $practica = Session::get('practica');
-    // Verifica si existe
-    if ($practica) {
-        // Puedes usar sus datos
-        $years = DB::table('years')->pluck('year', 'id');
-        $year_practica = Year::find($practica->id);
-        //dd($sm)
-        
-        // [id => year]
-        return view('datosiniciales', compact('practica', 'years', 'year_practica'));
-    } else {
-        return redirect()->back()->with('error', 'No se encontró la práctica en la sesión.');
-    }
+
 }
 
 
@@ -76,37 +64,23 @@ public function index()
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-        $practica = Practice::find($id);
-        if (!$practica) {
-            return redirect('dashboard')->with('error', 'No se encontró la práctica.');
-        }
-        if($practica->user_id!=Auth::user()->id){
-            return redirect('dashboard')->with('error', 'No se encontró la práctica.');
-        } 
-        $years = DB::table('years')->pluck('year', 'id'); // [id => year]
-        $year_practica = Year::find($practica->year_id);
-        
-        Session::put('practica', $practica);
-        return view('datosiniciales', compact('practica', 'years','year_practica'));
+public function show(string $id)
+{
+    $practica = Practice::find($id);
+    if (!$practica || $practica->user_id != Auth::user()->id) {
+        return redirect('dashboard')->with('error', 'No se encontró la práctica.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    $years = DB::table('years')->pluck('year', 'id');
+    $year_practica = Year::find($practica->year_id);
+    
+    // Eliminamos el uso de la sesión aquí.
+    return view('datosiniciales', compact('practica', 'years', 'year_practica'));
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
 public function update(Request $request)
 {
-     $request->validate([
+    $request->validate([
         'id' => 'required|exists:practices,id',
         'year' => 'required|integer',
     ]);
@@ -115,19 +89,14 @@ public function update(Request $request)
     $id_year = Year::where('year', $request->year)->value('id');
 
     if ($id_year) {
-        // Aquí cambia id_year por year_id, que es la columna correcta en la tabla practicas
         $practica->year_id = $id_year;
         $practica->save();
-        Session::put('practica', $practica);
-return redirect("/datosiniciales")->with('message', 'Año actualizado correctamente.');
-    } 
-    else {
-        return redirect('/datosiniciales')->with('error', 'Algo salio fatal.');
+        // Eliminamos el uso de la sesión aquí.
+        return redirect("/datosiniciales/{$practica->id}")->with('message', 'Año actualizado correctamente.');
+    } else {
+        return redirect('/datosiniciales')->with('error', 'Algo salió fatal.');
     }
 }
-
-
-
 
     /**
      * Remove the specified resource from storage.

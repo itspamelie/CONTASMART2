@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Session; //PONER EN TODOS LOS CONTROLADORES DE NOMINA
+use Illuminate\Support\Facades\Session; 
+use Illuminate\Support\Facades\DB;
+//PONER EN TODOS LOS CONTROLADORES DE NOMINA
 use Illuminate\Http\Request;
+use App\Models\Practice;
+use App\Models\Year;
+use Auth;
+use App\Models\Roster;
 
 class IsrController extends Controller
 {
@@ -10,19 +16,20 @@ class IsrController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(string $id)
     {
-  $practica = Session::get('practica');
-         if ($practica) {
-             return view('isr')->with('practica',$practica);
-        } else {
-            return redirect()->back()->with('error', 'No se encontró la práctica en la sesión.');
-        }
-         return view('isr');    }
+    $practica = Practice::find($id);
+    if (!$practica || $practica->user_id != Auth::user()->id) {
+        return redirect('dashboard')->with('error', 'No se encontró la práctica.');
+    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    $years = DB::table('years')->pluck('year', 'id');
+    $year_practica = Year::find($practica->year_id);
+    
+    // Eliminamos el uso de la sesión aquí.
+    return view('isr', compact('practica', 'years', 'year_practica'));
+        }
+        
     public function create()
     {
         //

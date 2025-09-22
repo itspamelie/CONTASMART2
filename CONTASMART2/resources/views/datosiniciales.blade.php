@@ -24,7 +24,26 @@
 </form>
 
   <h2 class="fw-semibold">Agregar empleado a la nómina</h2>
-  <p>De acuerdo al año en el que simulas tu nómina <b>({{$year_practica->year}})</b>, el salario diario debe ser de al menos:  <b>{{$year_practica->sm}}</b></p>
+  <p>De acuerdo al año en el que simulas tu nómina <b>({{$year_practica->year}})</b>, es importante tomar en cuenta los siguientes datos:</b></p>
+<!--TABLA CON DATOS INICIALES-->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Año</th>
+      <th scope="col">Salario mínimo</th>
+      <th scope="col">UMI</th>
+      <th scope="col">UMA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{$year_practica->year}}</th>
+      <td>{{$year_practica->sm}}</td>
+      <td>{{$year_practica->umi}}</td>
+      <td>{{$year_practica->uma}}</td>
+    </tr>
+  </tbody>
+</table>
 
   <!-- Cantidad de empleados -->
   <label for="numero" class="form-label mt-3">Ingresa la cantidad de empleados (1-30):</label>

@@ -20,7 +20,6 @@ Route::get('/dashboard', [DashboardController::class,'index']);
 Route::post('/saveproyect', [DashboardController::class,'store']);
 Route::post('/updateproyect', [DashboardController::class,'update']);
 Route::post('/deleteproyect', [DashboardController::class, 'destroy']);
-Route::get('/datosiniciales/{id}', [DatosinicialesController::class, 'show']);
 Route::post('/editarusuario', [ProfileController::class, 'update']);
 Route::post('/updateyear', [DatosinicialesController::class, 'update']);
 Route::post('/addnomina', [DatosinicialesController::class, 'store']);
@@ -28,8 +27,8 @@ Route::post('/addnomina', [DatosinicialesController::class, 'store']);
 
 Route::get('/nomina', [RosterController::class,'index']);
 Route::get('/cuotasimss', [CuotasimssController::class,'index']);
-Route::get('/datosiniciales', [DatosinicialesController::class,'index']);
-Route::get('/isr', [IsrController::class,'index']);
+Route::get('/datosiniciales/{id}', [DatosinicialesController::class, 'show'])->name('datosiniciales.show');
+Route::get('/isr/{id}', [IsrController::class,'index'])->name('isr.show');
 Route::get('/imss', [ImssController::class,'index']);
 Route::get('/aguinaldo', [AguinaldoController::class,'index']);
 Route::get('/costoimss', [CostoimssController::class,'index']);
