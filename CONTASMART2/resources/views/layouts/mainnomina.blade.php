@@ -96,7 +96,7 @@
 
 <div class="d-flex">
   <!-- Menú lateral -->
-  <div class="d-flex flex-column ms-0 justify-content-start px-0 fw-bold" style="width: 20%; background-color: #0277bd">
+  <div class="d-flex flex-column ms-0 justify-content-start px-0 fw-bold" style="width: 230px; background-color: #0277bd">
 
     <ul class="nav flex-column mt-2">
 

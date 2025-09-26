@@ -13,7 +13,7 @@
     class="form-control"
   >
     <option value="1">
-      Datos generales
+      SDI 1
   </option>
     <option value="2">
       SDI 2
@@ -41,12 +41,12 @@
     @foreach($nominas as $n)
     <tr>
       <td>{{$n->name}}</td>
-      <td>{{$n->name}}</td>
+      <td>01/01/{{$anioEntero-$n->antiguedad}}</td>
       <td>{{ now()->format('d-m-Y') }}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{$n->antiguedad}}</td>
+      <td>{{$n->antiguedad+1}}</td>
+      <td>{{$antique->dias_vacaciones}}</td>
+      <td>{{$n->salario}}</td>
     </tr>
   @endforeach
   </tbody>
@@ -67,17 +67,17 @@
     </tr>
   </thead>
   <tbody>
+        @foreach($nominas as $n)
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-
+      <td>{{$n->name}}</td>
+      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365, 2) }}</td>
+      <td>{{ number_format(($n->salario * 15) / 365, 2) }}</td>
+      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
+      <td class="text-center">0/{{$year_practica->uma}}/0</td>
+      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
+      <td>{{ ((($n->salario * $antique->dias_vacaciones * .25) / 365) + (($n->salario * 15) / 365) + $n->salario) / $n->salario }}</td>
     </tr>
-  
+  @endforeach
   </tbody>
 </table>
 
@@ -109,4 +109,32 @@
   })
 
 </script>
+
+@if (session('message'))
+<script>
+Swal.fire({
+  icon: 'success',
+  title: '¡Éxito!',
+  text: '{{ session('message') }}',
+  customClass: {
+    confirmButton: 'bg-blue text-white'
+  }
+});
+</script>
+@endif
+
+@if (session('error'))
+<script>
+Swal.fire({
+  icon: 'error',
+  title: '¡Error!',
+  text: '{{ session('error') }}',
+  customClass: {
+    confirmButton: 'bg-blue text-white'
+  }
+});
+@endif
+
+</script>
+
 @endsection 

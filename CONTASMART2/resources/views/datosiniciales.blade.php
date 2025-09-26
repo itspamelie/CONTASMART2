@@ -145,7 +145,8 @@ Swal.fire({
     confirmButton: 'bg-blue text-white'
   }
 });
-</script>
 @endif
+
+</script>
 
 @endsection

@@ -342,4 +342,34 @@
   })
 
 </script>
+
+
+
+@if (session('message'))
+<script>
+Swal.fire({
+  icon: 'success',
+  title: '¡Éxito!',
+  text: '{{ session('message') }}',
+  customClass: {
+    confirmButton: 'bg-blue text-white'
+  }
+});
+</script>
+@endif
+
+@if (session('error'))
+<script>
+Swal.fire({
+  icon: 'error',
+  title: '¡Error!',
+  text: '{{ session('error') }}',
+  customClass: {
+    confirmButton: 'bg-blue text-white'
+  }
+});
+@endif
+
+</script>
+
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Practice;
 use App\Models\Year;
+use App\Models\Antique;
 use Auth;
 use App\Models\Roster;
 
@@ -26,9 +27,23 @@ class SdiController extends Controller
 
     $years = DB::table('years')->pluck('year', 'id');
     $year_practica = Year::find($practica->year_id);
-    
+    $anio = date('Y');
+    $anioEntero = (int) $anio;
+
+    foreach ($nominas as $nomina) {
+    // Obtiene el ID de la antigüedad de la nómina
+    $idAntiguedad = $nomina->antiguedad+1;
+
+    // Realiza la consulta para obtener los días de vacaciones usando ese ID
+    $antique = Antique::find($idAntiguedad);
+
+    if ($antique) {
+        $diasVacaciones = $antique->dias_vacaciones;
+    } 
+}
+
     // Eliminamos el uso de la sesión aquí.
-    return view('sdi', compact('practica', 'years', 'year_practica','nominas'));
+    return view('sdi', compact('practica', 'years', 'year_practica','nominas','anioEntero','antique'));
     }
     }
 
