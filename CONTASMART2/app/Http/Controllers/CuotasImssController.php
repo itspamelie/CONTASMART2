@@ -22,14 +22,15 @@ class CuotasimssController extends Controller
         $practica = Practice::find($id);
     if (!$practica || $practica->user_id != Auth::user()->id) {
         return redirect('dashboard')->with('error', 'No se encontró la práctica.');
-    }
+    } 
 
     $years = DB::table('years')->pluck('year', 'id');
     $year_practica = Year::find($practica->year_id);
+    $nominas = Roster::where('id_practica', $practica->id)->get();
     
     // Eliminamos el uso de la sesión aquí.
-    return view('cuotasimss', compact('practica', 'years', 'year_practica'));
-    }
+    return view('cuotasimss', compact('practica', 'years', 'year_practica', 'nominas'));
+        }
 
     /**
      * Show the form for creating a new resource.

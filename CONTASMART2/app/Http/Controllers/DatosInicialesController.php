@@ -73,9 +73,9 @@ public function show(string $id)
 
     $years = DB::table('years')->pluck('year', 'id');
     $year_practica = Year::find($practica->year_id);
-    
+    $nominas = Roster::where('id_practica', $practica->id)->get();
     // Eliminamos el uso de la sesión aquí.
-    return view('datosiniciales', compact('practica', 'years', 'year_practica'));
+    return view('datosiniciales', compact('practica', 'years', 'year_practica','nominas'));
 }
 
 public function update(Request $request)
@@ -94,15 +94,36 @@ public function update(Request $request)
         // Eliminamos el uso de la sesión aquí.
         return redirect("/datosiniciales/{$practica->id}")->with('message', 'Año actualizado correctamente.');
     } else {
-        return redirect('/datosiniciales')->with('error', 'Algo salió fatal.');
+        return redirect("/datosiniciales/{$practica->id}")->with('error', 'Algo salió fatal.');
     }
 }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+   public function destroy(Request $request)
     {
-        //
+        // 1. Validamos que el ID del Roster (empleado) esté presente.
+        $request->validate([
+            'id' => 'required|exists:rosters,id',
+            // Opcional, pero recomendado: recibir el ID de la práctica
+            'id_practica' => 'required|exists:practices,id', 
+        ]);
+
+        $nomina = Roster::find($request->id);
+        
+        // Obtenemos el ID de la práctica ANTES de borrar el Roster, 
+        // para usarlo en la redirección.
+        $id_practica = $nomina ? $nomina->id_practica : $request->id_practica;
+        
+        if ($nomina) {
+            $nomina->delete();
+            
+            // REDIRECCIÓN CORREGIDA: Volvemos a la página de la práctica específica.
+            return redirect("/datosiniciales/{$id_practica}")->with('message', 'Empleado eliminado correctamente.');
+        } else {
+            // Si el Roster no se encuentra, usamos el ID de práctica enviado 
+            // en la solicitud (si existe) para la redirección.
+            $fallback_id = $request->input('id_practica', 'dashboard'); // Si no hay ID, va a 'dashboard'
+            
+            return redirect("/datosiniciales/{$fallback_id}")->with('error', 'No se ha encontrado el empleado.');
+        }
     }
 }

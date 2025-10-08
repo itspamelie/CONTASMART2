@@ -23,6 +23,9 @@ Route::post('/deleteproyect', [DashboardController::class, 'destroy']);
 Route::post('/editarusuario', [ProfileController::class, 'update']);
 Route::post('/updateyear', [DatosinicialesController::class, 'update']);
 Route::post('/addnomina', [DatosinicialesController::class, 'store']);
+Route::post('/dropnomina', [DatosinicialesController::class, 'destroy']);
+
+
 
 
 Route::get('/nomina', [RosterController::class,'index']);
