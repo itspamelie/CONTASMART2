@@ -78,6 +78,23 @@ public function show(string $id)
     return view('datosiniciales', compact('practica', 'years', 'year_practica','nominas'));
 }
 
+public function updatenomina(Request $request){
+    $validated = $request->validate([
+            'name'=>'required|string',
+            'salario'=>'required|numeric',
+            'antiguedad'=>'required|numeric',
+            'tipo_sueldo'=>'required'
+        ]);
+    $id = $request->id;
+        //metodo si los campos se llaman igual que en la base de datos
+        $data = Roster::findOrFail($id);
+                $id_practica = $data ? $data->id_practica : $request->id_practica;
+
+        $data->update($validated);
+     return redirect("/datosiniciales/{$id_practica}")->with('message', 'Datos del empleado actualizados correctamente.');
+
+}
+
 public function update(Request $request)
 {
     $request->validate([

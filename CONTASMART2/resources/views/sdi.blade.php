@@ -45,7 +45,10 @@
       <td>{{ now()->format('d-m-Y') }}</td>
       <td>{{$n->antiguedad}}</td>
       <td>{{$n->antiguedad+1}}</td>
-      <td>{{$antique->dias_vacaciones}}</td>
+      <td>@php
+$antiqueLocal = \App\Models\Antique::find($n->antiguedad + 1);
+@endphp
+{{ $antiqueLocal ? $antiqueLocal->dias_vacaciones : '-' }}</td>
       <td>{{$n->salario}}</td>
     </tr>
   @endforeach
@@ -70,12 +73,16 @@
         @foreach($nominas as $n)
     <tr>
       <td>{{$n->name}}</td>
-      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365, 2) }}</td>
+      <td>
+      @php
+$antiqueLocal = \App\Models\Antique::find($n->antiguedad + 1);
+@endphp  
+      {{ number_format(($n->salario * $antiqueLocal->dias_vacaciones * .25) / 365, 2) }}</td>
       <td>{{ number_format(($n->salario * 15) / 365, 2) }}</td>
-      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
+      <td>{{ number_format(($n->salario * $antiqueLocal->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
       <td class="text-center">0/{{$year_practica->uma}}/0</td>
-      <td>{{ number_format(($n->salario * $antique->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
-      <td>{{ ((($n->salario * $antique->dias_vacaciones * .25) / 365) + (($n->salario * 15) / 365) + $n->salario) / $n->salario }}</td>
+      <td>{{ number_format(($n->salario * $antiqueLocal->dias_vacaciones * .25) / 365,2)+number_format(($n->salario * 15) / 365, 2)+$n->salario}}</td>
+<td>{{ round(((($n->salario * $antiqueLocal->dias_vacaciones * .25) / 365) + (($n->salario * 15) / 365) + $n->salario) / $n->salario, 4) }}</td>
     </tr>
   @endforeach
   </tbody>

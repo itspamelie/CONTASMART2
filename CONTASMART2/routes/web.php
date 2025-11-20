@@ -24,11 +24,12 @@ Route::post('/editarusuario', [ProfileController::class, 'update']);
 Route::post('/updateyear', [DatosinicialesController::class, 'update']);
 Route::post('/addnomina', [DatosinicialesController::class, 'store']);
 Route::post('/dropnomina', [DatosinicialesController::class, 'destroy']);
+Route::post('/updatenomina', [DatosinicialesController::class, 'updatenomina']);
 
 
 
 
-Route::get('/nomina', [RosterController::class,'index']);
+Route::get('/nomina/{id}', [RosterController::class,'index']);
 Route::get('/cuotasimss/{id}', [CuotasimssController::class,'index']);
 Route::get('/datosiniciales/{id}', [DatosinicialesController::class, 'show'])->name('datosiniciales.show');
 Route::get('/isr/{id}', [IsrController::class,'index'])->name('isr.show');

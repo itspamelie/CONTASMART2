@@ -31,9 +31,12 @@
       <td>365</td>
       <td>15</td>
       <td>{{$n->salario*15}}</td>
-      <td>{{$antique->dias_vacaciones}}</td>
-      <td>{{$n->salario*$antique->dias_vacaciones}}</td>
-      <td>{{($n->salario*$antique->dias_vacaciones)*.25}}</td>
+      <td> @php
+$antiqueLocal = \App\Models\Antique::find($n->antiguedad + 1);
+@endphp  
+      {{  $antiqueLocal->dias_vacaciones }}</td>
+      <td>{{$n->salario*$antiqueLocal->dias_vacaciones}}</td>
+      <td>{{($n->salario*$antiqueLocal->dias_vacaciones)*.25}}</td>
 
     </tr>
     @endforeach

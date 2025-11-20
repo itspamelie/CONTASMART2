@@ -30,22 +30,11 @@ class CostoimssController extends Controller
     $anio = date('Y');
     $anioEntero = (int) $anio;
 
-    foreach ($nominas as $nomina) {
-    // Obtiene el ID de la antigüedad de la nómina
-    $idAntiguedad = $nomina->antiguedad+1;
-
-    // Realiza la consulta para obtener los días de vacaciones usando ese ID
-    $antique = Antique::find($idAntiguedad);
-
-    if ($antique) {
-        $diasVacaciones = $antique->dias_vacaciones;
-    } 
-}
-
+  
     // Eliminamos el uso de la sesión aquí.
-    return view('costoimss', compact('practica', 'years', 'year_practica','nominas','anioEntero','antique'));
+    return view('costoimss', compact('practica', 'years', 'year_practica','nominas','anioEntero'));
     }
-    }
+    }//
 
     /**
      * Show the form for creating a new resource.

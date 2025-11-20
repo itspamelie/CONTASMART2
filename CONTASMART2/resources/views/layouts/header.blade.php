@@ -1,7 +1,7 @@
  <nav class="sb-topnav navbar navbar-expand navbar-dark bg-orange">
             <div class="d-flex align-items-center justify-content-between text-white px-3 " style="width: 50%; height: 100%;">
     <img src="{{ asset('img/CONTASMARTLOGO.png') }}" alt="Logo Contasmart" style="height:50px;" class="me-2">
-    <h4 class="fw-bold m-0" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">CALCULADORA DE NOMINAS</h4>
+    <h4 class="fw-bold m-0" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">CALCULADORA DE NÓMINAS</h4>
 <button class="btn btn-link bg-white px-2 btn-sm order-1 order-lg-0 me-4 me-lg-0" 
         type="button" 
         data-bs-toggle="offcanvas" 
@@ -17,7 +17,7 @@
             </form>
             <!-- Navbar-->
               <div class="d-flex justify-content-end align-items-center px-4 text-white " style="width: 80%;">
-    <span class="me-3 fw-bold"> Practica: {{$practica->titulo}} </span>
+    <span class="me-3 fw-bold"> Práctica: {{$practica->titulo}} </span>
 
 
             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">

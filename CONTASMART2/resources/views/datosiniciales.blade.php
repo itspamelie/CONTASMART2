@@ -159,7 +159,7 @@
     
        <div class="mb-3">
             <label for="editarSalario" class="form-label">Salario del Empleado</label>
-            <input type="number"  min="{{$year_practica->sm}}" class="form-control" id="editarSalario" name="salario">
+            <input type="numeric"  min="{{$year_practica->sm}}" class="form-control" id="editarSalario" name="salario">
           </div>
     
 
@@ -182,7 +182,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-warning">Guardar Cambios</button>
+        <button type="submit" class="btn btn-warning">Guardar Cambios</button>
       </div>
               </form>
 
